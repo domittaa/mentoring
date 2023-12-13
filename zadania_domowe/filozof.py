@@ -82,7 +82,7 @@ class Philosopher(threading.Thread):
 
 def main():
     number_of_philosophers = 5
-    semaphore = Semaphore(number_of_philosophers-1)
+    semaphore = Semaphore(number_of_philosophers)
     forks = [Fork(i) for i in range(number_of_philosophers)]
     philosophers = [
         Philosopher(i, forks[i], forks[(i+1) % number_of_philosophers], semaphore) for i in range(number_of_philosophers)
