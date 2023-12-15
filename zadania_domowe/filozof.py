@@ -30,7 +30,7 @@ class Fork:
     def __init__(self, id):
         self.id = id
         self.is_taken = False
-        self.philosopher = -1
+        self.philosopher = None
         self.lock = threading.Condition(threading.Lock())
 
     def take(self, philosopher):
@@ -46,7 +46,7 @@ class Fork:
         with self.lock:
             while not self.is_taken:
                 self.lock.wait()
-            self.philosopher = -1
+            self.philosopher = None
             self.is_taken = False
             print(f"Fork {self.id} dropped by philosopher {philosopher}")
             self.lock.notify_all()

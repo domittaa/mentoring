@@ -8,7 +8,7 @@ from queue import Queue
 from threading import Barrier, Thread
 
 
-def producer(id,amount, barrier, queue):
+def producer(id, amount, barrier, queue):
     for i in range(amount):  # produce specified amount of things
         thing = f"Something produced by producer number {id}"
         time.sleep(1)
