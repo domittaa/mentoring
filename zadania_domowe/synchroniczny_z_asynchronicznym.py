@@ -5,9 +5,19 @@ nie posiada on też żadnego asynchronicznego odpowiednika.
 W jaki sposób zintegrujesz czasochłonny synchroniczny kod z asynchronicznym.
 Zaimplementuj przykładowe rozwiązanie, np. łącząc asyncio i wątki/procesy do obliczeń wymagających dużego zużycia CPU.
 '''
+import asyncio
+import time
 
-# async def main():
-#     result = await loop.run_in_executor(None, long_running_task)
-#     print(result)
-#
-# loop.run_until_compelete(main())
+
+def long_running_task():
+    time.sleep(5)
+    print("Long task finished")
+
+
+async def main():
+    coroutine = asyncio.to_thread(long_running_task)
+    task = asyncio.create_task(coroutine)
+    await asyncio.sleep(0)
+    await task
+
+asyncio.run(main())
