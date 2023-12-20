@@ -4,10 +4,6 @@ Zaimplementuj program rozwiązujący problem 5 filozofów.
 import threading
 import time
 
-'''
-Semafor-> ogranicza liczbe procesow wchodzacych do sekcji krytycznej
-'''
-
 
 class Semaphore:
     def __init__(self, limit):

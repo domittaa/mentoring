@@ -87,8 +87,8 @@ async def factorial_asyncio(n):
     return final_result
 
 
-async def factorial_main():
-    result = await factorial_asyncio(50)
+async def factorial_main(n):
+    result = await factorial_asyncio(n)
     return result
 
 
@@ -97,4 +97,4 @@ if __name__ == "__main__":
     print(f"Silnia petla: {factorial_synchronous_loop(50)}")
     print(f"Silnia watki: {factorial_thread(50)}")
     print(f"Silnia procesy: {factorial_process(50, 5)}")
-    print(f"Silnia acyncio: {asyncio.run(factorial_main())}")
+    print(f"Silnia acyncio: {asyncio.run(factorial_main(50))}")

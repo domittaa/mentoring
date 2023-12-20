@@ -3,11 +3,7 @@ Zaimplementuj program, który w jednym wątku/procesie będzie udostępniać API
 a w innych będzie realizować jakieś proste zadania.
 API ma udostępniać dane zwrócone przez wątki/procesy oraz ich status.
 API ma pozwalać na kontrolowanie stanu procesów roboczych.
-'''
-import multiprocessing
-import uvicorn
 
-'''
 Mamy dwa procesy/watki
 1- api wystawione na fastapi
 2- liczenie po kolei ciagu fibbonaciego
@@ -17,8 +13,11 @@ Api moze kontrolowac watek z liczeniem, jeden endpoint start/stop do uruchomieni
 drugi do wyswietlenia statusu czyli dziala/ nie dziala i jaki wynik
 Przy odpytaniu endpointa watek z wyliczaniem liczb musi byc zatrzymany-> zrobic swoja zmienna warunkowa
 '''
+
 from fastapi import FastAPI
 import time
+import multiprocessing
+import uvicorn
 
 app = FastAPI()
 
@@ -31,6 +30,7 @@ def fibonacci(status, last_number):
         if status.value:
             a, b = 0, 1
             while status.value:
+                time.sleep(2)
                 a, b = b, a + b
                 with last_number.get_lock():
                     last_number.value = a
@@ -38,7 +38,7 @@ def fibonacci(status, last_number):
             time.sleep(1)
 
 
-@app.get("/start_stop")
+@app.post("/start_stop")
 def start_stop(status: bool):
     global is_running
     with is_running.get_lock():
