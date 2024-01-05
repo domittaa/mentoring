@@ -13,21 +13,24 @@ class GreetingMeta(type):
         dct['func'] = func
         return super(GreetingMeta, cls).__new__(cls, name, bases, dct)
 
+
 # Use the metaclass to create a new class
 class MyClass(metaclass=GreetingMeta):
     def foo(self):
         ...
 
+
 # Another class using the metaclass
 class AnotherClass(metaclass=GreetingMeta):
     pass
+
 
 # Example usage
 obj1 = MyClass()
 obj2 = AnotherClass()
 
-print(obj1.func())
-print(obj1.func)
-print(obj1.greet)
-print(obj1.greet())  # Prints: Hello from MyClass
-print(obj2.greet())  # Prints: Hello from AnotherClass
+# print(obj1.func())
+# print(obj1.func)
+# print(obj1.greet)
+# print(obj1.greet())  # Prints: Hello from MyClass
+# print(obj2.greet())  # Prints: Hello from AnotherClass
