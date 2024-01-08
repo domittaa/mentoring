@@ -6,12 +6,12 @@
 
 class VerifyMeta(type):
     def __init__(cls, name, bases, dct):
-        try:
-            dct['hello_world'] and dct['MESSAGE']
-        except KeyError:
-            print(f"Class {cls} did not pass verification")
-        else:
+        func = dct.get('hello_world', None)
+        attr = dct.get('MESSAGE', None)
+        if func and attr and isinstance(attr, str):
             print(f"Class {cls} passed verification")
+        else:
+            print(f"Class {cls} did not pass verification")
 
 
 class A(metaclass=VerifyMeta):
@@ -23,4 +23,11 @@ class A(metaclass=VerifyMeta):
 
 class B(metaclass=VerifyMeta):
     pass
+
+
+class C(metaclass=VerifyMeta):
+    MESSAGE = 56
+
+    def hello_world(self):
+        pass
 
