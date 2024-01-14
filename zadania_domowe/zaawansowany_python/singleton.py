@@ -16,8 +16,14 @@ class Singleton(metaclass=MetaSingleton):
     pass
 
 
-print(Singleton())
-print(Singleton())
+a = Singleton()
+b = Singleton()
+c = Singleton()
+print(a)
+print(b)
+print(c)
+print(a is b)
+print(b is c)
 
 
 
