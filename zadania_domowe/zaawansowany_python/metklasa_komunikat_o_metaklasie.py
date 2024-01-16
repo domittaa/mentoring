@@ -4,8 +4,9 @@
 
 
 class NotifyMeta(type):
-    def __init__(cls, name, bases, dct):
-        print(f"{cls} is being created")
+    def __new__(cls, *args, **kwargs):
+        print(f"{cls.__name__} is being created")
+        return super().__new__(cls, *args, **kwargs)
 
 
 class A(metaclass=NotifyMeta):
@@ -14,3 +15,4 @@ class A(metaclass=NotifyMeta):
 
 class B(metaclass=NotifyMeta):
     pass
+

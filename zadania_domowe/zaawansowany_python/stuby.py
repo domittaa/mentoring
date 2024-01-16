@@ -12,5 +12,5 @@ class MyClass:
         pass
 
     def foo(self):
-        return False
+        return True
 
